@@ -1,0 +1,18 @@
+version: '3'
+services:
+  banco:
+    container_name: banco
+    image: usuario/banco
+    build: ./banco
+    ports:
+      - "5433:5432"
+  app-bandas:
+    container_name: app-vendas
+    image: usuario/app-vendas
+    build: ./app-vendas
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "banco"
+    links:
+      - "banco:host-banco"
