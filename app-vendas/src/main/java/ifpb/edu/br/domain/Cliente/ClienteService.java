@@ -13,22 +13,40 @@ public class ClienteService {
     private ClientesEmJDBC clientes;
 
     public void novoCliente(Cliente novo){
-
+        if (novo == null) {
+            System.out.println("Cliente nulo");
+            return;
+        }
+        if (novo.valido()) {
+            clientes.criar(novo);
+        }
     }
 
-    public void removerCliente(Cliente novo){
-
+    public void removerCliente(Cliente cliente){
+        if (cliente == null) {
+            System.out.println("Cliente nulo");
+            return;
+        }
+        if (cliente.valido()) {
+            clientes.excluir(cliente);
+        }
     }
 
     public List<Cliente> listarTodos(){
-        return null;
+        return clientes.listarTodos();
     }
 
     public Cliente listarPorId(int id){
-        return null;
+        return clientes.buscaPorId(id);
     }
 
     public void atualizarCliente(Cliente novo){
-
+        if (novo == null) {
+            System.out.println("Cliente nulo");
+            return;
+        }
+        if (novo.valido()) {
+            clientes.atualizar(novo);
+        }
     }
 }
