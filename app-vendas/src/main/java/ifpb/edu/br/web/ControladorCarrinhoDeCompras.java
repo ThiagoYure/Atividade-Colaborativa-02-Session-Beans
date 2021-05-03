@@ -2,6 +2,7 @@ package ifpb.edu.br.web;
 
 import ifpb.edu.br.aplication.CarrinhoDeCompras;
 import ifpb.edu.br.domain.Cliente.Cliente;
+import ifpb.edu.br.domain.Item.Item;
 import ifpb.edu.br.domain.Produto.Produto;
 import ifpb.edu.br.domain.Produto.ProdutoService;
 
@@ -19,14 +20,12 @@ public class ControladorCarrinhoDeCompras implements Serializable {
 
     @EJB
     private CarrinhoDeCompras carrinho;
-    private Produto produto = new Produto();
     private Cliente cliente = new Cliente();
 
-    public String novo() {
+    public String novo(Produto produto) {
         this.carrinho.adicionar(
-                this.produto
+                produto
         );
-        this.produto = new Produto();
         return null;
     }
 
@@ -59,14 +58,6 @@ public class ControladorCarrinhoDeCompras implements Serializable {
     public String decrementar(Produto produto) {
         this.carrinho.decrementar(produto);
         return null;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
     }
 
     public Cliente getCliente() {

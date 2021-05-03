@@ -18,6 +18,7 @@ public class ProdutoService {
             System.out.println("Cliente nulo");
             return;
         }
+        System.out.println(novo.valido());
         if (novo.valido()) {
             produtos.criar(novo);
         }

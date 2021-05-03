@@ -19,7 +19,7 @@
                           statement-timeout-in-seconds="-1" steady-pool-size="8"
                           validate-atmost-once-period-in-seconds="0"
                           wrap-jdbc-objects="false">
-        <property name="serverName" value="host-banco"/>
+        <property name="serverName" value="banco"/>
         <property name="portNumber" value="5432"/>
         <property name="databaseName" value="app-vendas"/>
         <property name="User" value="usuario"/>

@@ -21,27 +21,32 @@ public class ControladorProduto implements Serializable {
     @EJB
     private ProdutoService produtoService;
     private Produto produto = new Produto();
-    private List<Produto> produtos = new ArrayList<Produto>();
 
     public String novoProduto(){
+        System.out.println(produto.toString());
         produtoService.novoProduto(produto);
         return null;
     }
 
-    public String listarTodos(){
-        produtos = produtoService.listarTodos();
-        return null;
+    public List<Produto> listarTodos(){
+        return produtoService.listarTodos();
     }
 
-    public String excluir(){
+    public String excluir(Produto produto){
         produtoService.removerProduto(produto);
-        produto = new Produto();
+        this.produto = new Produto();
         return null;
     }
 
     public String atualizar(){
         produtoService.atualizarProduto(produto);
+        this.produto = new Produto();
         return null;
+    }
+
+    public String atualizarProdutoLocal(Produto produto){
+        this.produto = produto;
+        return "atualizacao_produto.xhtml?faces-redirect=true";
     }
 
     public Produto getProduto() {
@@ -50,13 +55,5 @@ public class ControladorProduto implements Serializable {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 }

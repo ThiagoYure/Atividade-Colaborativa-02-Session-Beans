@@ -19,27 +19,32 @@ public class ControladorCliente implements Serializable {
     @EJB
     private ClienteService clienteService;
     private Cliente cliente = new Cliente();
-    private List<Cliente> clientes = new ArrayList<Cliente>();
 
     public String novoCliente(){
+        System.out.println(cliente.toString());
         clienteService.novoCliente(cliente);
         return null;
     }
 
-    public String listarTodos(){
-        clientes = clienteService.listarTodos();
-        return null;
+    public List<Cliente> listarTodos(){
+        return clienteService.listarTodos();
     }
 
-    public String excluir(){
+    public String excluir(Cliente cliente){
         clienteService.removerCliente(cliente);
-        cliente = new Cliente();
+        this.cliente = new Cliente();
         return null;
     }
 
     public String atualizar(){
         clienteService.atualizarCliente(cliente);
+        cliente = new Cliente();
         return null;
+    }
+
+    public String atualizarClienteLocal(Cliente cliente){
+        this.cliente = cliente;
+        return "atualizacao_cliente.xhtml?faces-redirect=true";
     }
 
     public Cliente getCliente() {
@@ -48,13 +53,5 @@ public class ControladorCliente implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
     }
 }

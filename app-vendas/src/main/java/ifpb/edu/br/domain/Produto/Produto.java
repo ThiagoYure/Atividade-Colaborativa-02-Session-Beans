@@ -70,7 +70,6 @@ public class Produto implements Serializable {
     }
 
     public boolean valido(){
-        return !"".equals(this.descricao.trim())
-                && !((this.valor.compareTo(BigDecimal.ZERO))<0);
+        return !"".equals(this.descricao.trim());
     }
 }

@@ -7,9 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="template.xhtml">
         <ui:define name="template">
-            <h1>Home!</h1>
+            <h1>Bem Vindo ao Home!</h1>
+            <h3>Navegue abaixo:</h3>
             <h:form>
-                <h1>Bem vindo!</h1>
+                <h:commandLink class="btn" action="Cliente/cadastro_cliente">Cadastro de Cliente</h:commandLink> <br/>
+                <h:commandLink class="btn" action="Cliente/listagem_clientes">Listagem de Clientes</h:commandLink> <br/>
+                <h:commandLink class="btn" action="Produto/cadastro_produto">Cadastro de Produto</h:commandLink> <br/>
+                <h:commandLink class="btn" action="Produto/listagem_produto">Listagem de Produtos</h:commandLink> <br/>
+                <h:commandLink class="btn" action="Vendas/carrinho_compras">Meu carrinho</h:commandLink> <br/>
             </h:form>
         </ui:define>
     </ui:composition>
