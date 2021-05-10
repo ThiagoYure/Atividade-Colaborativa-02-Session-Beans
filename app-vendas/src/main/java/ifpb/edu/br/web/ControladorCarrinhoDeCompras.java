@@ -11,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,11 @@ public class ControladorCarrinhoDeCompras implements Serializable {
     @EJB
     private CarrinhoDeCompras carrinho;
     private Cliente cliente = new Cliente();
+    private List<Produto> produtos = new ArrayList<>();
 
-    public String novo(Produto produto) {
-        this.carrinho.adicionar(
-                produto
-        );
+    public String novo() {
+        this.cliente.setId(1);
+        this.carrinho.adicionar( calcularVenda(), this.cliente.getId());
         return null;
     }
 
@@ -34,13 +35,19 @@ public class ControladorCarrinhoDeCompras implements Serializable {
         return null;
     }
 
-    public List<Item> todosOsProdutos() {
-        return this.carrinho.itens();
+    public List<Produto> todosOsProdutos() {
+        return produtos;
     }
 
     public String checkout() {
-        this.carrinho.finalizar(this.cliente);
-        NovaInstanciaCarrinho();
+        try {
+            this.carrinho.adicionar(calcularVenda(), 1);
+            this.carrinho.finalizar(produtos);
+            NovaInstanciaCarrinho();
+        }
+        catch (NullPointerException error){
+            System.out.println(error);
+        }
         return null;
     }
 
@@ -48,16 +55,25 @@ public class ControladorCarrinhoDeCompras implements Serializable {
         this.carrinho = CDI.current()
                 .select(CarrinhoDeCompras.class)
                 .get();
+        produtos = new ArrayList<>();
     }
 
     public String incrementar(Produto produto) {
-        this.carrinho.incrementar(produto);
+        produtos.add(produto);
         return null;
     }
 
     public String decrementar(Produto produto) {
-        this.carrinho.decrementar(produto);
+        produtos.remove(produto);
         return null;
+    }
+    
+    public BigDecimal calcularVenda(){
+        double valor = 0.0;
+        for (Produto produto: produtos) {
+            valor= valor + produto.getValor().doubleValue();
+        }
+        return BigDecimal.valueOf(valor);
     }
 
     public Cliente getCliente() {

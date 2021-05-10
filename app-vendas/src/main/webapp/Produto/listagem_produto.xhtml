@@ -26,7 +26,7 @@
                     <h:commandButton value="Editar" action="#{controladorProduto.atualizarProdutoLocal(produto)}" class="btn"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Adcionar ao carrinho" action="#{controladorCarrinhoDeCompras.novo(produto)}" class="btn"/>
+                    <h:commandButton value="Adcionar ao carrinho" action="#{controladorCarrinhoDeCompras.incrementar(produto)}" class="btn"/>
                 </h:column>
             </h:dataTable>
         </h:form>

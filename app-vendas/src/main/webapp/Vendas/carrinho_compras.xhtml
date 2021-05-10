@@ -9,31 +9,23 @@
     <ui:define name="template">
         <h1>Carrinho de Compras!</h1>
         <h:form>
-            <h:commandLink class="btn" value="Novo Produto" action="cadastro_produto"/>
-            <h:commandLink class="btn" value="Listar Produtos" action="listagem_produto"/>
-            <h:dataTable var="item" value="#{controladorCarrinhoDeCompras.todosOsProdutos()}" class="striped highlight">
+            <h:commandLink class="btn" value="Novo Produto" action="/Produto/cadastro_produto"/>
+            <h:commandLink class="btn" value="Listar Produtos" action="/Produto/listagem_produto"/>
+            <h:dataTable var="produto" value="#{controladorCarrinhoDeCompras.todosOsProdutos()}" class="striped highlight">
                 <h:column>
                     <f:facet name="header">Descrição</f:facet>
-                    #{item.produto.descricao}
+                    #{produto.descricao}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Preço</f:facet>
-                    #{item.produto.valor}
+                    #{produto.valor}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Quantidade</f:facet>
-                    #{item.quantidade}
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Excluir" action="#{controladorCarrinhoDeCompras.remover(item.produto)}" class="btn"/>
-                </h:column>
-                <h:column>
-                    <h:commandButton value="+" action="#{controladorCarrinhoDeCompras.incrementar(item.produto)}" class="btn"/>
-                </h:column>
-                <h:column>
-                    <h:commandButton value="-" action="#{controladorCarrinhoDeCompras.decrementar(item.produto)}" class="btn"/>
+                    <h:commandButton value="Excluir" action="#{controladorCarrinhoDeCompras.decrementar(produto)}" class="btn"/>
                 </h:column>
             </h:dataTable>
+            <h:commandButton value="Finalizar" action="#{controladorCarrinhoDeCompras.checkout()}" class="btn"/>
+            <h:commandButton value="Meus pedidos" action="meus_pedidos" class="btn"/>
         </h:form>
     </ui:define>
 </ui:composition>

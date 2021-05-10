@@ -5,7 +5,7 @@ services:
     image: usuario/banco
     build: ./banco
     ports:
-      - "5433:5432"
+      - "5434:5432"
   app-bandas:
     container_name: app-vendas
     image: usuario/app-vendas
